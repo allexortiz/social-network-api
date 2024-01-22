@@ -12,12 +12,12 @@ const {
   removeFriend,
 } = require("../../controllers/user-controller");
 
-// Define routes for the '/api/Users' endpoint
+// Define routes for the '/api/users' endpoint
 router.route("/")
   .get(getAllUser)  // GET request to get all users
   .post(createUser);  // POST request to create a new user
 
-// Define routes for the '/api/Users/:id' endpoint
+// Define routes for the '/api/users/:id' endpoint
 router.route("/:id")
   .get(getUserById)  // GET request to get a user by ID
   .put(updateUser)   // PUT request to update a user by ID
