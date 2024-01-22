@@ -1,5 +1,5 @@
 // Import the Thought model from the "../models" directory
-const { Thought } = require("../models");
+const { Thought, User } = require("../models");
 
 // Import the User model
 const User = require("../models/User");
@@ -42,12 +42,14 @@ const thoughtController = {
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
-          { _id: params.id },
+          { _id: body.userId },
           { $push: { thoughts: _id } },
           { new: true }
         );
       })
-      .then((dbThoughtData) => res.json(dbThoughtData))
+      .then((dbThoughtData) => {
+        res.json(dbThoughtData);
+      })
       .catch((err) => res.json(err));
   },
 

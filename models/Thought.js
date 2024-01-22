@@ -28,9 +28,17 @@ const ReactionSchema = new Schema({
         type: Date,
         default: Date.now,  // Default to the current date and time
         // Use a getter method to format the timestamp on query
-        get: (createdAtVal) => dateFormat(createdAtVal),
+        get: (timestamp) => dateFormat(timestamp),
     },
-});
+},
+    {
+        // Define toJSON options for the schema
+        toJSON: {
+            getters: true,  // Include getters when converting to JSON
+        },
+        id: false,  // Exclude the default '_id' field from the JSON representation
+    }
+);
 
 // Define a new mongoose schema for the Thought model
 const ThoughtSchema = new Schema(
@@ -48,7 +56,7 @@ const ThoughtSchema = new Schema(
             type: Date,
             default: Date.now,  // Default to the current date and time
             // Use a getter method to format the timestamp on query
-            get: (createdAtVal) => dateFormat(createdAtVal),
+            get: (timestamp) => dateFormat(timestamp),
         },
 
         // Define the 'username' field as a required String
@@ -64,6 +72,7 @@ const ThoughtSchema = new Schema(
         // Define toJSON options for the schema
         toJSON: {
             virtuals: true,  // Include virtual properties when converting to JSON
+            getters: true,  // Include getters when converting to JSON
         },
         id: false,  // Exclude the default '_id' field from the JSON representation
     }
