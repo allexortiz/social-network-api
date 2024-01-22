@@ -1,5 +1,6 @@
 // Import necessary modules from mongoose
 const { Schema, model, Types } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 // Define a new mongoose schema for the Reaction model
 const ReactionSchema = new Schema({
@@ -27,6 +28,7 @@ const ReactionSchema = new Schema({
         type: Date,
         default: Date.now,  // Default to the current date and time
         // Use a getter method to format the timestamp on query
+        get: (createdAtVal) => dateFormat(createdAtVal),
     },
 });
 
@@ -46,6 +48,7 @@ const ThoughtSchema = new Schema(
             type: Date,
             default: Date.now,  // Default to the current date and time
             // Use a getter method to format the timestamp on query
+            get: (createdAtVal) => dateFormat(createdAtVal),
         },
 
         // Define the 'username' field as a required String
