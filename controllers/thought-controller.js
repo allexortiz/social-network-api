@@ -1,9 +1,6 @@
 // Import the Thought model from the "../models" directory
 const { Thought, User } = require("../models");
 
-// Import the User model
-const User = require("../models/User");
-
 // Controller object for handling Thought-related operations
 const thoughtController = {
   // Get all Thoughts
