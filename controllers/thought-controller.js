@@ -30,7 +30,12 @@ const thoughtController = {
         select: "-__v",
       })
       .select("-__v")
-      .then((dbThoughtData) => res.json(dbThoughtData))
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          return res.status(404).json({ message: "No thought with this id!" });
+        }
+        res.json(dbThoughtData);
+      })
       .catch((err) => {
         console.log(err);
         res.sendStatus(400);
@@ -47,8 +52,14 @@ const thoughtController = {
           { new: true }
         );
       })
-      .then((dbThoughtData) => {
-        res.json(dbThoughtData);
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          return res
+            .status(404)
+            .json({ message: "Thought created but no user with this id!" });
+        }
+
+        res.json({ message: "Thought successfully created!" });
       })
       .catch((err) => res.json(err));
   },

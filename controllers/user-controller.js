@@ -33,7 +33,14 @@ const userController = {
                 select: "-__v",
             })
             .select("-__v")
-            .then((dbUserData) => res.json(dbUserData))
+            .then((dbUserData) => {
+                if (!dbUserData) {
+                    return res
+                        .status(404)
+                        .json({ message: "No user found with this id!" });
+                }
+                res.json(dbUserData);
+            })
             .catch((err) => {
                 console.log(err);
                 res.sendStatus(400);
@@ -64,11 +71,18 @@ const userController = {
     },
 
     // delete user
-    //   BONUS: Remove a user's associated thoughts when deleted.
     deleteUser({ params }, res) {
         User.findOneAndDelete({ _id: params.id })
-            .then((dbUserData) => res.json(dbUserData))
-            .catch((err) => res.json(err));
+            .then((dbUserData) => {
+                if (!dbUserData) {
+                    return res.status(404).json({ message: "No user with this id!" });
+                }
+                // $in to find specific things
+                return Thought.deleteMany({ _id: { $in: dbUserData.thoughts } });
+            })
+            .then(() => {
+                res.json({ message: "User and associated thoughts deleted!" });
+            }).catch((err) => res.json(err));
     },
 
     // add friend
@@ -95,7 +109,12 @@ const userController = {
             { $pull: { friends: params.friendId } },
             { new: true }
         )
-            .then((dbUserData) => res.json(dbUserData))
+            .then((dbUserData) => {
+                if (!dbUserData) {
+                    return res.status(404).json({ message: "No user with this id!" });
+                }
+                res.json(dbUserData);
+            })
             .catch((err) => res.json(err));
     },
 };
