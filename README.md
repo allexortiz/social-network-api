@@ -48,15 +48,11 @@ It's an API designed for a social networking web platform, enabling users to exp
 To run this project, open the intergrated terminal and enter:
 
 ```
-npm install
+npm i
 ```
 
 ## Usage
-After running the project, enter the following code to install the packages and start the server:
-
-```
-npm i
-```
+After running the project, enter the following code to start the server:
 
 ```
 npm start
