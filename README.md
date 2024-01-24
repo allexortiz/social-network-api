@@ -41,7 +41,7 @@ It's an API designed for a social networking web platform, enabling users to exp
 6. Visual Studio Code
 
 ## Links
-- [Github Repository](https://github.com/allexortiz/employee-tracker)
+- [Github Repository](https://github.com/allexortiz/social-network-api)
 - [Demo Video](https://drive.google.com/file/d/1DqPtApEDOF6qi48ACUEkOqv0ahT9I3-L/view)
 
 ## Installation
